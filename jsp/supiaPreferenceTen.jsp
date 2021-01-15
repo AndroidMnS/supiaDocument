@@ -4,13 +4,16 @@
     pageEncoding="UTF-8"%>
 
 <%
-    String productNo = request.getParameter("productNo");
+    String productId = request.getParameter("productNo");
         
 	String url_mysql = "jdbc:mysql://database-2.cotrd7tmeavd.ap-northeast-2.rds.amazonaws.com/supia?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";   
-    String WhereDefault = "select count(*) from review where reviewTitle like '%만족%' and productNo ='"+productNo+"' ";
-   
+    String WhereDefault1 = "select count(*) birth  from ( ";
+    String WhereDefault2 = "select productId from orderlist where productId='"+productId+"' ";
+    String WhereDefault3 = "union all ";
+    String WhereDefault4 = "select productId from subscribeOrder where productId='"+productId+"' ";
+    String WhereDefault5 = ") birth , calendar where calendarBirthDate between '2003-12-31' and '2012-01-01' ";
     int count = 0;
     
     try {
@@ -18,10 +21,10 @@
         Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
         Statement stmt_mysql = conn_mysql.createStatement();
 
-        ResultSet rs = stmt_mysql.executeQuery(WhereDefault); // 
+        ResultSet rs = stmt_mysql.executeQuery(WhereDefault1+WhereDefault2+WhereDefault3+WhereDefault4+WhereDefault5); // 
 %>
 		{ 
-  			"buy"  : [ 
+  			"birth"  : [ 
 <%
         while (rs.next()) {
             if (count == 0) {
@@ -33,7 +36,7 @@
             }
 %>            
 			{
-			"cnt" : "<%=rs.getString(1) %>"
+			"birth" : "<%=rs.getString(1) %>"
 			
             
 

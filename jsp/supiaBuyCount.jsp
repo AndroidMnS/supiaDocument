@@ -4,16 +4,16 @@
     pageEncoding="UTF-8"%>
 
 <%
-    String productId = request.getParameter("productId");
+    String productId = request.getParameter("productNo");
         
 	String url_mysql = "jdbc:mysql://database-2.cotrd7tmeavd.ap-northeast-2.rds.amazonaws.com/supia?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";   
     String WhereDefault1 = "select count(*) cnt from ( ";
-    String WhereDefault2 = "select * from orderlist where productId='"+productId+"' ";
-    String WhereDefault3 = "union ";
-    String WhereDefault4 = "select * from subscribeOrder where productId='"+productId+"' ";
-    String WhereDefault5 = ")cnt";
+    String WhereDefault2 = "select productId from orderlist where productId='"+productId+"' ";
+    String WhereDefault3 = "union all ";
+    String WhereDefault4 = "select productId from subscribeOrder where productId='"+productId+"' ";
+    String WhereDefault5 = ") cnt ";
     int count = 0;
     
     try {

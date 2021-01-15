@@ -38,6 +38,7 @@
 			"deliveryName" : "<%=rs.getString(3) %>",  
 			"insertDate" : "<%=rs.getString(4) %>",
             "userId" : "<%=rs.getString(5) %>"
+        
            
 			}
 

@@ -4,14 +4,17 @@
 
 <%
     String strBtnCategory =  request.getParameter("productCategory1");
+    String likeUserId =  request.getParameter("likeUserId");
+
+
 
 	String url_mysql = "jdbc:mysql://database-2.cotrd7tmeavd.ap-northeast-2.rds.amazonaws.com/supia?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";
-    String WhereDefault = "select productNo, productName, productPrice, productQuantity, productBrand, productImagePath, productInfo, ";       
-    String WhereDefault1 = "productCategory1, productCategory2, count(productId) as 'rank' ";
-    String WhereDefault2 = "from orderlist, product where productId = productNo and productCategory1 like '%" + strBtnCategory + "%' ";
-    String WhereDefault3 = "group by productId order by productId desc";
+    String WhereDefault = "select productNo,product.productName,product.productPrice,productQuantity,productBrand,productImagePath,productInfo,productCategory1,productCategory2,likeUserId,likeProductId,likeCheck,count(productId) as ranking ";       
+    String WhereDefault1 = "From supia.product left join orderlist on product.productno = orderlist.productId ";
+    String WhereDefault2 = "Left join liked on product.productno = liked.likeproductid where productCategory1 ";
+    String WhereDefault3 = "like '%" + strBtnCategory + "%' and likeUserId = '" + likeUserId +"'group by orderlist.productId order by ranking desc";
 
 
     int count = 0;
@@ -46,7 +49,10 @@
                 "productInfo" :"<%=rs.getString(7) %>",
                 "productCategory1" :"<%=rs.getString(8) %>",
                 "productCategory2" :"<%=rs.getString(9) %>",
-                "rank" :"<%=rs.getInt(10) %>"
+                "likeUserId" :"<%=rs.getString(10) %>",
+                "likeProductId" :"<%=rs.getInt(11) %>",
+                "likeCheck" :"<%=rs.getString(12) %>",
+                "ranking" :"<%=rs.getInt(13) %>"
 			}
 
 <%		

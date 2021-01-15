@@ -10,7 +10,7 @@
 	String url_mysql = "jdbc:mysql://database-2.cotrd7tmeavd.ap-northeast-2.rds.amazonaws.com/supia?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";   
-    String WhereDefault = "select productNo,productName,productPrice,productImagePath,likeUserId,likeProductId,likeCheck from product,liked where productNo = likeProductId and likeCheck ='1' and likeUserId = '"+likeUserId+ "' ";
+    String WhereDefault = "select productNo,productName,productPrice,productBrand,productInfo,productImagePath,likeUserId,likeProductId,likeCheck from product,liked where productNo = likeProductId and likeCheck ='1' and likeUserId = '"+likeUserId+ "' ";
     int count = 0;
     
     try {
@@ -36,10 +36,12 @@
 			"productNo" : "<%=rs.getInt(1) %>", 
 			"productName" : "<%=rs.getString(2) %>",   
 			"productPrice" : "<%=rs.getInt(3) %>",  
-			"productImagePath" : "<%=rs.getString(4) %>",
-            "likeUserId" : "<%=rs.getString(5) %>",
-           "likeProductId" : "<%=rs.getInt(6) %>",
-           "likeCheck" : "<%=rs.getString(7)%>"
+            "productBrand" : "<%=rs.getString(4) %>",
+            "productInfo" : "<%=rs.getString(5) %>",
+			"productImagePath" : "<%=rs.getString(6) %>",
+            "likeUserId" : "<%=rs.getString(7) %>",
+           "likeProductId" : "<%=rs.getInt(8) %>",
+           "likeCheck" : "<%=rs.getString(9)%>"
 			}
 
 <%		

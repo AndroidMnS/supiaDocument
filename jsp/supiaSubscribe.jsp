@@ -9,7 +9,7 @@
 	String url_mysql = "jdbc:mysql://database-2.cotrd7tmeavd.ap-northeast-2.rds.amazonaws.com/supia?serverTimezone=Asia/Seoul&characterEncoding=utf8&useSSL=false";
  	String id_mysql = "root";
  	String pw_mysql = "qwer1234";   
-    String WhereDefault = "select subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderAddrDetail,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice from subscribeOrder,product where productId=productNo and userId = '"+userId+"'";
+    String WhereDefault = "select subscribeOrderDate,subscribeOrderQuantity,subscribeOrderAddr,subscribeOrderAddrDetail,subscribeOrderPayment,userId,productId,productNo,productName,productImagePath,productPrice,subscribeOrderNextDate from subscribeOrder,product where productId=productNo and userId = '"+userId+"'";
     int count = 0;
     
     try {
@@ -42,7 +42,9 @@
             "productNo" : "<%=rs.getInt(8) %>",
             "productName" : "<%=rs.getString(9) %>",
             "productImagePath" : "<%=rs.getString(10) %>",
-            "productPrice" : "<%=rs.getInt(11) %>"
+            "productPrice" : "<%=rs.getInt(11) %>",
+             "subscribeOrderNextDate" : "<%=rs.getString(12) %>"
+
 
 			}
 
